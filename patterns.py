@@ -1,0 +1,2 @@
+YEAR_PATTERN = "[0-9]{4}"
+STRPTIME_GAME_PATTERN = "%b %d%Y"
