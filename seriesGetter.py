@@ -18,11 +18,11 @@ def parse_scores_from_series_page(urls: List[str]):
         soup = BeautifulSoup(requests.get(prefix_url + url).content, "html.parser")
         series_games = parse_all_games_from_series(soup, url)
 
-        pseries = parse_all_a_series(series_games, url)
+        pseries = parse_a_series(series_games, url)
         assert True
 
 
-def parse_all_a_series(series_games: List[PlayoffGame], url: str):
+def parse_a_series(series_games: List[PlayoffGame], url: str):
 
     teams_and_wins = {
         series_games[:1].pop().winner: 1,
