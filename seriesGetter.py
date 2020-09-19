@@ -16,13 +16,14 @@ gets all the urls of the series in the season and scrap series by series data
 
 def parse_scores_from_series_page(urls: List[str]):
     prefix_url = "https://www.basketball-reference.com/"
+    series = []
     for url in urls:
         soup = BeautifulSoup(requests.get(prefix_url + url).content, "html.parser")
         series_games = parse_all_games_from_series(soup, url)
 
         pseries = parse_a_series(series_games, url)
-        pseries.elimination_games()
-        assert True
+        series.append(pseries)
+    return series
 
 
 def parse_a_series(series_games: List[PlayoffGame], url: str):

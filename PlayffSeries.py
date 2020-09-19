@@ -60,6 +60,12 @@ class PlayoffSeries:
     def loser_elimination_games(self):
         return self.elimination_games()[1]
 
+    def __sizeof__(self):
+        return self.playoff_year()
+
+    def __gt__(self, other):
+        return self.__sizeof__() > other.__sizeof__()
+
 
 def process_elimination_game(
     series_length,
