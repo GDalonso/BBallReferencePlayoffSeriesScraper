@@ -8,7 +8,7 @@ os.environ["HUE"] = "1"
 
 if __name__ == "__main__":
     # parse_scores_from_series_page(scrap_seasons(2018, 2019))
-    all_series = parse_scores_from_series_page(scrap_seasons(1977, 2019))
+    all_series = parse_scores_from_series_page(scrap_seasons(1977, 2020))
     yearly_dict = {str(series.playoff_year()): [] for series in all_series}
     for series in all_series:
         yearly_dict[str(series.playoff_year())] = yearly_dict[

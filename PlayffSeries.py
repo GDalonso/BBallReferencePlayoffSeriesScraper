@@ -1,4 +1,5 @@
 from constants import WINS_NECESSARY_BY_SERIES_LENGTH, NBA_CHAMPS
+from datetime import datetime
 
 
 class PlayoffSeries:
@@ -7,7 +8,8 @@ class PlayoffSeries:
         self.winner = winner
         self.loser = loser
         self.games = games
-        self.best_of_series = best_of_series
+        #series that arent over were breaking this
+        self.best_of_series = best_of_series if self.playoff_year() != datetime.now().year else 7
 
     def winner_wins(self):
         from seriesGetter import get_teams_and_total_wins
