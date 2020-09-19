@@ -55,10 +55,10 @@ class PlayoffSeries:
         return winner_elimination_games_so_far, loser_elimination_games_so_far
 
     def winner_elimination_games(self):
-        return self.elimination_games()[:1]
+        return self.elimination_games()[0]
 
     def loser_elimination_games(self):
-        return self.elimination_games()[1:]
+        return self.elimination_games()[1]
 
 
 def process_elimination_game(
