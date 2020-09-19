@@ -1,7 +1,10 @@
 import requests
-from bs4 import BeautifulSoup, Tag as bs4Tag
-from PlayffSeries import PlayoffGame, PlayoffSeries
+from bs4 import BeautifulSoup
+from PlayffSeries import PlayoffSeries
+from PlayoffGame import PlayoffGame
 from datetime import datetime
+
+from constants import SERIES_LENGTH_BY_WINNER_WINS
 from patterns import YEAR_PATTERN, STRPTIME_GAME_PATTERN, SERIES_NAME_PATTERN
 from re import findall as re_findall
 from typing import List
@@ -9,7 +12,6 @@ from typing import List
 """
 gets all the urls of the series in the season and scrap series by series data
 """
-series_length_by_winner_wins = {"1": 1, "2": 3, "3": 5, "4": 7}
 
 
 def parse_scores_from_series_page(urls: List[str]):
@@ -24,15 +26,9 @@ def parse_scores_from_series_page(urls: List[str]):
 
 def parse_a_series(series_games: List[PlayoffGame], url: str):
 
-    teams_and_wins = {
-        series_games[:1].pop().winner: 1,
-        series_games[:1].pop().loser: 0,
-    }
-    for game in series_games[1:]:
-        # sum all the other wins
-        teams_and_wins[game.winner] = teams_and_wins.get(game.winner) + 1
+    teams_and_wins = get_teams_and_total_wins(series_games)
     series_winner = max(teams_and_wins, key=teams_and_wins.get)
-    series_length = series_length_by_winner_wins.get(
+    series_length = SERIES_LENGTH_BY_WINNER_WINS.get(
         str(teams_and_wins.get(series_winner))
     )
     loser_definer = lambda dic, winner: (dic.keys() - [series_winner]).pop()
@@ -44,7 +40,19 @@ def parse_a_series(series_games: List[PlayoffGame], url: str):
         winner=series_winner,
         loser=series_loser,
         series_name=series_name,
+        best_of_series=series_length,
     )
+
+
+def get_teams_and_total_wins(series_games):
+    teams_and_wins = {
+        series_games[:1].pop().winner: 1,
+        series_games[:1].pop().loser: 0,
+    }
+    for game in series_games[1:]:
+        # sum all the other wins
+        teams_and_wins[game.winner] = teams_and_wins.get(game.winner) + 1
+    return teams_and_wins
 
 
 def parse_all_games_from_series(soup: BeautifulSoup, url: str) -> List[PlayoffGame]:
