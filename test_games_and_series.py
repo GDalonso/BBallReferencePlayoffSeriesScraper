@@ -5,8 +5,8 @@ from random import randint
 from string import ascii_uppercase, digits
 from datetime import datetime
 
-def mock_playoffGame():
 
+def mock_playoffGame():
 
     # Gera uma string com letras e numeros de tamanho 10
     winner = "".join(random_choices(ascii_uppercase + digits, k=10))
@@ -40,12 +40,19 @@ def mock_series():
     # Invert the winner of the first game
     list(map(fix_names, games, [games[0].loser], [games[0].winner]))
 
-    series_name="".join(random_choices(ascii_uppercase + digits, k=10))
-    return PlayoffSeries(series_name, winner=games[-1].winner, loser=games[-1].loser, games=games, best_of_series=7)
+    series_name = "".join(random_choices(ascii_uppercase + digits, k=10))
+    return PlayoffSeries(
+        series_name,
+        winner=games[-1].winner,
+        loser=games[-1].loser,
+        games=games,
+        best_of_series=7,
+    )
+
 
 def test_playoffGame():
     game = mock_playoffGame()
-    #Has no behaviours to test
+    # Has no behaviours to test
 
 
 def test_playoffSeries():
@@ -58,4 +65,3 @@ def test_playoffSeries():
     assert pseries.winner_elimination_games() == 0
 
     assert True
-
