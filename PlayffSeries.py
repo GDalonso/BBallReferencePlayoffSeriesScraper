@@ -23,10 +23,60 @@ class PlayoffSeries:
         return self.games[-1].date.year
 
     def winner_is_champ(self):
+        # True if the winner of the series get to be the nba champ
         # If some the last playoff game of a series ran in a different year
-        #than the championship this will bug
+        # than the championship this will bug
         return True if self.winner is NBA_CHAMPS.get(self.playoff_year()) else False
 
     def elimination_games(self):
-        WINS_NECESSARY_BY_SERIES_LENGTH
-        series_moment = {}
+        # WINS_NECESSARY_BY_SERIES_LENGTH
+        winner_elimination_games_so_far = 0
+        loser_elimination_games_so_far = 0
+
+        winner_games_won_so_far = 0
+        loser_games_won_so_far = 0
+        for game in self.games:
+            (
+                winner_elimination_games_so_far,
+                loser_elimination_games_so_far,
+            ) = process_elimination_game(
+                self.best_of_series,
+                winner_games_won_so_far,
+                loser_games_won_so_far,
+                winner_elimination_games_so_far,
+                loser_elimination_games_so_far,
+            )
+
+            if game.winner == self.winner:
+                winner_games_won_so_far = winner_games_won_so_far + 1
+            if game.winner == self.loser:
+                loser_games_won_so_far = loser_games_won_so_far + 1
+
+        return winner_elimination_games_so_far, loser_elimination_games_so_far
+
+    def winner_elimination_games(self):
+        return self.elimination_games()[:1]
+
+    def loser_elimination_games(self):
+        return self.elimination_games()[1:]
+
+
+def process_elimination_game(
+    series_length,
+    winner_games_won_so_far,
+    loser_games_won_so_far,
+    winner_elimination_games_so_far,
+    loser_elimination_games_so_far,
+):
+    if (
+        winner_games_won_so_far
+        is WINS_NECESSARY_BY_SERIES_LENGTH.get(str(series_length)) - 1
+    ):
+        loser_elimination_games_so_far = loser_elimination_games_so_far + 1
+    if (
+        loser_games_won_so_far
+        is WINS_NECESSARY_BY_SERIES_LENGTH.get(str(series_length)) - 1
+    ):
+        winner_elimination_games_so_far = winner_elimination_games_so_far + 1
+
+    return winner_elimination_games_so_far, loser_elimination_games_so_far

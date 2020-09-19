@@ -21,6 +21,7 @@ def parse_scores_from_series_page(urls: List[str]):
         series_games = parse_all_games_from_series(soup, url)
 
         pseries = parse_a_series(series_games, url)
+        pseries.elimination_games()
         assert True
 
 
