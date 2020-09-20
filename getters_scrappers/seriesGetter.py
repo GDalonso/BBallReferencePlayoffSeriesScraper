@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
-from PlayffSeries import PlayoffSeries
-from PlayoffGame import PlayoffGame
+from models.PlayoffSeries import PlayoffSeries
+from models.PlayoffGame import PlayoffGame
 from datetime import datetime
 
 from constants import SERIES_LENGTH_BY_WINNER_WINS

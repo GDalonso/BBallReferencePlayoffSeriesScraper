@@ -10,11 +10,11 @@ def test_scrap_seasons():
     url = f"https://www.basketball-reference.com/playoffs/NBA_2010.html"
 
     soup = BeautifulSoup(requests.get(url).content, "html.parser")
-    from seasonsGetter import get_container_with_series
+    from getters_scrappers.seasonsGetter import get_container_with_series
 
     urls = urls + get_container_with_series(soup)
 
-    from seasonsGetter import get_container_with_series_deprecated
+    from getters_scrappers.seasonsGetter import get_container_with_series_deprecated
 
     urls_depr = urls_depr + get_container_with_series_deprecated(soup)
 

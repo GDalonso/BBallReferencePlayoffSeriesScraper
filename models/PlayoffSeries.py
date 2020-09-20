@@ -14,12 +14,12 @@ class PlayoffSeries:
         )
 
     def winner_wins(self):
-        from seriesGetter import get_teams_and_total_wins
+        from getters_scrappers.seriesGetter import get_teams_and_total_wins
 
         return get_teams_and_total_wins(self.games).get(self.winner)
 
     def loser_wins(self):
-        from seriesGetter import get_teams_and_total_wins
+        from getters_scrappers.seriesGetter import get_teams_and_total_wins
 
         return get_teams_and_total_wins(self.games).get(self.loser)
 

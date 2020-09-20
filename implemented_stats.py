@@ -1,6 +1,6 @@
 from typing import List
 
-from TeamPlayoffYear import TeamPlayoffYear
+from models.TeamPlayoffYear import TeamPlayoffYear
 
 def teams_that_played_the_most_elimination_games(playoff_resume: List[TeamPlayoffYear]):
 

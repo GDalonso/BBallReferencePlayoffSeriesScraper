@@ -1,11 +1,8 @@
-from TeamPlayoffYear import build_teams_resumes
-from seasonsGetter import scrap_seasons
+from models.TeamPlayoffYear import build_teams_resumes
+from getters_scrappers.seasonsGetter import scrap_seasons
 from implemented_stats import teams_that_played_the_most_elimination_games, champs_that_faced_most_elimination_games, \
     teams_that_won_the_most_elimination_games
-from seriesGetter import parse_scores_from_series_page
-import os
-
-os.environ["HUE"] = "1"
+from getters_scrappers.seriesGetter import parse_scores_from_series_page
 
 if __name__ == "__main__":
 

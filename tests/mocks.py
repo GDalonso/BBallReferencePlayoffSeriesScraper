@@ -1,9 +1,10 @@
-from PlayffSeries import PlayoffSeries
-from PlayoffGame import PlayoffGame
-from random import choices as random_choices
-from random import randint
-from string import ascii_uppercase, digits
 from datetime import datetime
+from random import choices as random_choices, randint
+from string import ascii_uppercase, digits
+
+from models.PlayoffSeries import PlayoffSeries
+from models.PlayoffGame import PlayoffGame
+from models.TeamPlayoffYear import TeamPlayoffYear
 
 
 def mock_playoffGame():
@@ -49,19 +50,6 @@ def mock_series():
         best_of_series=7,
     )
 
-
-def test_playoffGame():
-    game = mock_playoffGame()
-    # Has no behaviours to test
-
-
-def test_playoffSeries():
-    pseries = mock_series()
-
-    assert pseries.winner_wins() == 4
-    assert pseries.loser_wins() == 1
-    assert pseries.winner_is_champ() is False
-    assert pseries.loser_elimination_games() == 1
-    assert pseries.winner_elimination_games() == 0
-
-    assert True
+def mock_team_year_resume():
+    series=mock_series()
+    return TeamPlayoffYear(series.winner, series.playoff_year(), [series])
