@@ -8,8 +8,10 @@ class PlayoffSeries:
         self.winner = winner
         self.loser = loser
         self.games = games
-        #series that arent over were breaking this
-        self.best_of_series = best_of_series if self.playoff_year() != datetime.now().year else 7
+        # series that arent over were breaking this
+        self.best_of_series = (
+            best_of_series if self.playoff_year() != datetime.now().year else 7
+        )
 
     def winner_wins(self):
         from seriesGetter import get_teams_and_total_wins
@@ -61,6 +63,23 @@ class PlayoffSeries:
 
     def loser_elimination_games(self):
         return self.elimination_games()[1]
+
+    def team_elimination_games(self, team_name):
+        if team_name != self.winner and team_name != self.loser:
+            return
+        return (
+            self.loser_elimination_games()
+            if team_name is self.loser
+            else self.winner_elimination_games()
+        )
+
+    def ongoing_series(self):
+        return (
+            True
+            if int(WINS_NECESSARY_BY_SERIES_LENGTH.get(str(self.best_of_series)))
+            > self.winner_wins()
+            else False
+        )
 
     def __sizeof__(self):
         return self.playoff_year()

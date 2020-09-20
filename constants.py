@@ -56,8 +56,7 @@ ALL_TEAMS_NAMES = [
     "TORONTO RAPTORS",
     "UTAH JAZZ",
     "WASHINGTON WIZARDS",
-
-    #Names that don't exist anymore (names from 1977 on)
+    # Names that don't exist anymore (names from 1977 on)
     "BUFFALO BRAVES",
     "CHARLOTTE BOBCATS",
     "KANSAS CITY KINGS",
