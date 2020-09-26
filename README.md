@@ -17,4 +17,15 @@ Getters_scrappers contains
 
 implemented_stats
     
-    - contains all the stats already implemented    
+    - contains all the stats already implemented
+
+deploying with cloud functions
+
+    With your terminal with gcloud sdk setup used
+    gcloud functions deploy hello_get --trigger-http --runtime python38    
+    
+    where
+        - functions = google cloud functions
+        - hello_get = name of the function in the main.py file i want to deploy
+        - trigger-http = trigers the function when get a request
+        -- runtime = python version
