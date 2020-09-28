@@ -29,3 +29,8 @@ deploying with cloud functions
         - hello_get = name of the function in the main.py file i want to deploy
         - trigger-http = trigers the function when get a request
         -- runtime = python version
+
+Running it locally and debugging
+    ![alt text](https://hackultura.s3.amazonaws.com/Public/debug_cloud_functions.png "how to use it in pycharm")
+
+    
