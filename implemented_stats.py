@@ -2,6 +2,7 @@ from typing import List
 
 from models.TeamPlayoffYear import TeamPlayoffYear
 
+
 def teams_that_played_the_most_elimination_games(playoff_resume: List[TeamPlayoffYear]):
 
     # Sort all the teams with the most elimination games

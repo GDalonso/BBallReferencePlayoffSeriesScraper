@@ -1,37 +1,43 @@
 from models.TeamPlayoffYear import build_teams_resumes
 from getters_scrappers.seasonsGetter import scrap_seasons
-from implemented_stats import teams_that_played_the_most_elimination_games, champs_that_faced_most_elimination_games, \
-    teams_that_won_the_most_elimination_games
+from implemented_stats import (
+    teams_that_played_the_most_elimination_games,
+    champs_that_faced_most_elimination_games,
+    teams_that_won_the_most_elimination_games,
+)
 from getters_scrappers.seriesGetter import parse_scores_from_series_page
 from flask import jsonify, abort
 
 stats_to_func_dict = {
-    'teams_with_most_elimination_games': teams_that_played_the_most_elimination_games,
-    'champs_with_most_elimination_games': champs_that_faced_most_elimination_games,
-    'teams_that_won_most_elimination_games': teams_that_won_the_most_elimination_games,
+    "teams_with_most_elimination_games": teams_that_played_the_most_elimination_games,
+    "champs_with_most_elimination_games": champs_that_faced_most_elimination_games,
+    "teams_that_won_most_elimination_games": teams_that_won_the_most_elimination_games,
 }
 
 # [START functions_get_stat]
 def get_stat(request):
-    if request.method == 'GET':
+    if request.method == "GET":
         return docs()
     elif request.method == "POST":
-        content_type = request.headers['content-type']
-        if content_type == 'application/json':
+        content_type = request.headers["content-type"]
+        if content_type == "application/json":
             result = request.get_json(force=True)
-        elif content_type == 'application/x-www-form-urlencoded':
+        elif content_type == "application/x-www-form-urlencoded":
             result = request.form
         else:
             return ValueError("content must be json or form encoded")
 
         try:
-            startYear = int(result.get('startYear'))
-            endYear = int(result.get('endYear'))
+            startYear = int(result.get("startYear"))
+            endYear = int(result.get("endYear"))
         except Exception as e:
-            return {"error", "Your data isn't well formated, please use postman for tests"}
+            return {
+                "error",
+                "Your data isn't well formated, please use postman for tests",
+            }
 
         playoff_resume = get_bbalref_data(startYear, endYear)
-        statFunc = stats_to_func_dict.get(result.get('stat'), None)
+        statFunc = stats_to_func_dict.get(result.get("stat"), None)
 
         if statFunc:
             stat_res = statFunc(playoff_resume)
@@ -39,7 +45,9 @@ def get_stat(request):
 
     return abort(404)
 
+
 # [END functions_get_stat]
+
 
 def docs(hue=None):
     return "doc to be implemented"
