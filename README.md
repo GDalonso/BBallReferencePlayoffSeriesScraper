@@ -22,7 +22,7 @@ implemented_stats
 deploying with cloud functions
 
     With your terminal with gcloud sdk setup used
-    gcloud functions deploy hello_get --trigger-http --runtime python38    
+    gcloud functions deploy get_stat --trigger-http --runtime python38    
     
     where
         - functions = google cloud functions

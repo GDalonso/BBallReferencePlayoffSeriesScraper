@@ -27,6 +27,7 @@ def champs_that_faced_most_elimination_games(playoff_resume: List[TeamPlayoffYea
     champs_with_most_elimination_games = sorted(
         a.items(), key=lambda x: x[1], reverse=True
     )
+
     def filter_not_champs(item):
         return item[1] is not False
 

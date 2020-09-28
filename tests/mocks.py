@@ -50,6 +50,7 @@ def mock_series():
         best_of_series=7,
     )
 
+
 def mock_team_year_resume():
-    series=mock_series()
+    series = mock_series()
     return TeamPlayoffYear(series.winner, series.playoff_year(), [series])

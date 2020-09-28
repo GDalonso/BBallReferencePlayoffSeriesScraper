@@ -27,7 +27,11 @@ class TeamPlayoffYear:
             [series.ongoing_series() for series in self.series]
         ):
             return self.get_quantity_of_elimination_games()
-        return self.get_quantity_of_elimination_games() - 1 if self.get_quantity_of_elimination_games() > 0 else 0
+        return (
+            self.get_quantity_of_elimination_games() - 1
+            if self.get_quantity_of_elimination_games() > 0
+            else 0
+        )
 
 
 def build_teams_resumes(all_playoff_series):

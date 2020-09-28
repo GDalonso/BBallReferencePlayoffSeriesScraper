@@ -6,6 +6,7 @@ def test_playoffGame():
     game = mock_playoffGame()
     # Has no behaviours to test
 
+
 def test_playoffSeries():
     pseries = mock_series()
 
@@ -17,16 +18,17 @@ def test_playoffSeries():
     assert pseries.ongoing_series() is False
     assert pseries.team_elimination_games
 
+
 def test_TeamPlayoffYear():
-    team_playoff_year=mock_team_year_resume()
+    team_playoff_year = mock_team_year_resume()
 
     assert team_playoff_year.get_quantity_of_elimination_games() == 0
     assert team_playoff_year.team_is_champ() is False
     assert team_playoff_year.get_quantity_of_elimination_games_by_champ() is False
-    assert team_playoff_year.get_quantity_of_won_elimination_games()==0
+    assert team_playoff_year.get_quantity_of_won_elimination_games() == 0
 
 
 def test_build_resumes():
     all_year_series = [mock_series() for i in range(2)]
-    team_by_year=build_teams_resumes(all_year_series)
+    team_by_year = build_teams_resumes(all_year_series)
     assert isinstance(team_by_year[0], TeamPlayoffYear)
